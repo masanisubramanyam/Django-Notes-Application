@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8888:8000"
+    command: python /app/backend/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app/backend
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
