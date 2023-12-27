@@ -13,7 +13,7 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy the application code
 COPY . /app/backend/
 
-EXPOSE 8000
+EXPOSE 8888
 
 CMD python /app/backend/manage.py runserver 0.0.0.0:8000
 
