@@ -1,0 +1,30 @@
+pipeline{
+    agent any
+    stages{
+        stage('code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/masanisubramanyam/Django-Notes-Application.git'
+            }
+        }
+        stage("Build"){
+            steps{
+                sh "docker build . -t django-notes-application"
+            }
+        }
+        stage("Pushing to Docker Hub"){
+            steps{
+                withCredentials([usernamePassword(credentialsId:"Docker-Hub-Credentials",passwordVariable: '123456789', usernameVariable: 'subramanyammasani')]){
+                sh "docker tag django-notes-application ${env.subramanyammasani}/django-notes-application:latest"
+                sh "docker login -u ${env.subramanyammasani} -p ${env."123456789"}"
+                sh "docker push ${env.subramanyammasani}/django-notes-application:latest"
+                }
+            }
+        }
+         stage("Deploy"){
+            steps{
+                echo "deploy"
+                sh "docker-compose down && docker-compose up -d"
+            }
+        }
+    }  
+}    
